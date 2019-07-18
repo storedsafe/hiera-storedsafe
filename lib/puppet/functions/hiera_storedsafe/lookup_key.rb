@@ -21,7 +21,14 @@ Puppet::Functions.create_function(:'hiera_storedsafe::lookup_key') do
       context.not_found
     end
 
-    api = Storedsafe.configure do |config| end
+    config_sources = []
+    config_sources.push(options['config']) unless options['config'].nil?
+    config_sources.push(Storedsafe::Config::RcReader.parse_file) if options['use_rc']
+    config_sources.push(Storedsafe::Config::EnvReader.parse_env) if options['use_env']
+
+    api = Storedsafe.configure do |config|
+      config.config_sources = config_sources if config_sources.any?
+    end
 
     res = api.object(obj_id)
 
