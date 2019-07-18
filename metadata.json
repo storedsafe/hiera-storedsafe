@@ -1,10 +1,12 @@
 {
   "name": "oscarmat-storedsafe",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "Oscar Mattsson <oscar_mattsson@live.se>",
-  "summary": "",
+  "summary": "Hiera backend accessing the Storedsafe REST-like API.",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/storedsafe/hiera-storedsafe",
+  "project_page": "https://storedsafe.com/",
+  "issues_url": "https://github.com/storedsafe/hiera-storedsafe/issues",
   "dependencies": [
 
   ],

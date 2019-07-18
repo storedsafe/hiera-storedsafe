@@ -12,6 +12,8 @@ Puppet::Functions.create_function(:'hiera_storedsafe::lookup_key') do
     param 'Puppet::LookupContext', :context
   end
 
+  class StoredsafeError < StandardError; end
+
   def lookup_key(key, options, context)
     ns, obj_id, field = key.split('::')
 
@@ -19,22 +21,32 @@ Puppet::Functions.create_function(:'hiera_storedsafe::lookup_key') do
       context.not_found
     end
 
-    begin
-      api = Storedsafe.configure do |config| end
+    api = Storedsafe.configure do |config| end
 
-      encrypted = ['password']
-      decrypt = encrypted.include? field
+    res = api.object(obj_id)
 
-      res = api.object(obj_id, decrypt)
-      obj = res['OBJECT'][obj_id]
-
-      if decrypt
-        obj['crypted'][field]
+    if res['CALLINFO']['status'] == 'FAIL'
+      raise StoredsafeError, res['ERRORS']
+    elsif res['OBJECT'].any?
+      # Identify whether or not the field needs to be decrypted
+      template_id = res['OBJECT'][obj_id]['templateid']
+      template = res['TEMPLATESINFO'][template_id]
+      if template['STRUCTURE'][field]
+        encrypted = template['STRUCTURE'][field]['encrypted']
       else
-        obj[field]
+        # Field doesn't exist
+        context.not_found
       end
-    rescue StandardError => e
-      raise e
+
+      if encrypted
+        res = api.object(obj_id, true)
+        res['OBJECT'][obj_id]['crypted'][field]
+      else
+        res['OBJECT'][obj_id][field]
+      end
+    else
+      # Object doesn't exist
+      context.not_found
     end
   end
 end
