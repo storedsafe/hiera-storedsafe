@@ -22,7 +22,7 @@ defaults:
 
 hierarchy:
   - name: "Storedsafe lookup key"
-    lookup_key: hiera_storedsfae::lookup_key
+    lookup_key: hiera_storedsafe::lookup_key
 
   - name: "Common data"
     path: "common.yaml"
