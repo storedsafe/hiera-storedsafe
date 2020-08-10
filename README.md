@@ -2,7 +2,7 @@
 A Hiera backend to retrieve secrets from Password StoredSafe (by StoredSafe).
 
 ## Dependencies
-The Storedsafe gem must be installed on the puppet master.
+The StoredSafe gem must be installed on the puppet master.
 
 ```
 puppetserver gem install storedsafe
@@ -21,14 +21,14 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
-  - name: "Storedsafe lookup key"
+  - name: "StoredSafe lookup key"
     lookup_key: hiera_storedsafe::lookup_key
 
   - name: "Common data"
     path: "common.yaml"
 ```
 
-To configure the storedsafe connection you can either generate a storedsafe rc file using the [Storedsafe Tokenhandler](https://github.com/storedsafe/tokenhandler) (requires python 2.7) or pass a manual configuration through the hiera.yaml file.
+To configure the storedsafe connection you can either generate a storedsafe rc file using the [StoredSafe Tokenhandler](https://github.com/storedsafe/tokenhandler) (requires python 2.7) or pass a manual configuration through the hiera.yaml file.
 
 If you're using the tokenhandler, make sure the file is in the home directory of the puppet user and is readable by the puppet user.
 
@@ -42,7 +42,7 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
-  - name: "Storedsafe lookup key"
+  - name: "StoredSafe lookup key"
     lookup_key: hiera_storedsafe::lookup_key
     options:
       config:
