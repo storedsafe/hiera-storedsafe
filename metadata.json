@@ -1,6 +1,6 @@
 {
   "name": "oscarmat-hiera_storedsafe",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "Oscar Mattsson <oscar_mattsson@live.se>",
   "summary": "Hiera backend accessing the Storedsafe REST-like API.",
   "license": "Apache-2.0",
