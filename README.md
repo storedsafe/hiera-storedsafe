@@ -28,11 +28,11 @@ hierarchy:
     path: "common.yaml"
 ```
 
-To configure the storedsafe connection you can either generate a storedsafe rc file using the [StoredSafe Tokenhandler](https://github.com/storedsafe/tokenhandler) (requires python 2.7) or pass a manual configuration through the hiera.yaml file.
+To configure the storedsafe connection you can either generate a storedsafe rc file using the [StoredSafe Tokenhandler](https://github.com/storedsafe/tokenhandler) (requires python3) or pass a manual configuration through the hiera.yaml file.
 
 If you're using the tokenhandler, make sure the file is in the home directory of the puppet user and is readable by the puppet user.
 
-For the manual configuration (not recommended), you can pass the token, api key and server directly through the hiera.yaml config file.
+For the manual configuration (not recommended), you can pass the token, and host directly through the hiera.yaml config file.
 ```
 ---
 version: 5
@@ -46,9 +46,8 @@ hierarchy:
     lookup_key: hiera_storedsafe::lookup_key
     options:
       config:
-        server: "my.storedsafe.server"
+        host: "my.storedsafe.host"
         token: "my-active-token"
-        api_key: "secret"
 
   - name: "Common data"
     path: "common.yaml"
