@@ -9,7 +9,7 @@ puppetserver gem install storedsafe
 ```
 
 ## Usage
-To install the puppet module, clone this repository with the destination `<puppet directory>/modules/hiera_storedsafe` (the lib directory should be directory in the hiera\_storedsafe directory).
+To install the puppet module, either clone this [repository](https://github.com/storedsafe/hiera-storedsafe) with the destination `<puppet directory>/modules/hiera_storedsafe` (the lib directory should be directory in the hiera\_storedsafe directory) or install from [puppet forge](https://github.com/storedsafe/hiera-storedsafe).
 
 Add the hiera\_storedsafe backend to your hiera.yaml config file.
 ```
